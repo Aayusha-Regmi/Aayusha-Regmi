@@ -2,13 +2,16 @@ name: metrics
 
 on:
   schedule:
-    - cron: "0 0 * * *"  # runs every day
-  workflow_dispatch:     # allows manual trigger
+    - cron: "0 0 * * *"  # runs daily at midnight UTC
+  workflow_dispatch:      # allows manual trigger
 
 jobs:
   github-metrics:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
       - name: Generate GitHub Metrics
         uses: lowlighter/metrics@latest
         with:
@@ -17,3 +20,47 @@ jobs:
           template: classic
           base: header, activity, community, repositories
           config_timezone: Asia/Kathmandu
+
+  gitlab-metrics:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install pacman-contribution-graph
+        run: npm install -g pacman-contribution-graph
+
+      - name: Generate GitLab Graph
+        run: |
+          pacman-contribution-graph \
+            --platform gitlab \
+            --username "aayusharegmi" \
+            --output "./gitlab-graph.svg" \
+            --gameTheme gitlab
+
+  update-readme:
+    runs-on: ubuntu-latest
+    needs: [github-metrics, gitlab-metrics]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Copy graphs to README location
+        run: |
+          mkdir -p ./graphs
+          cp ./metrics.svg ./graphs/github-metrics.svg || true
+          cp ./gitlab-graph.svg ./graphs/gitlab-metrics.svg || true
+
+      - name: Commit & Push Graphs
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: "GitHub Actions"
+          author_email: "actions@github.com"
+          message: "Update GitHub & GitLab metrics graphs"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -174,6 +174,11 @@
 </p>
 <!-- activity graph heroku-app end -->
 
+<p align="center">
+  <img src="./graphs/github-metrics.svg" width="45%" alt="GitHub Metrics" />
+  <img src="./graphs/gitlab-metrics.svg" width="45%" alt="GitLab Metrics" />
+</p>
+
 
 <p align="center">
     <a href="https://github.com/Aayusha-Regmi/Aayusha-Regmi">

@@ -167,14 +167,14 @@
 
 
 <!-- activity graph heroku-app start -->
-<p align="center">
+<!-- <p align="center">
     <a href="#">
         <img src="https://github-readme-activity-graph.vercel.app/graph?username=Aayusha-Regmi&theme=gotham&hide_border=false&hide_title=false&area=true&custom_title=Total%20Contribution%20Graph%20In%20All%20Repo" width="95%" alt="activity graph">
     </a>
-</p>
+</p> -->
 <!-- activity graph heroku-app end -->
 
-<p align="center">
+<!-- <p align="center">
   <img src="./graphs/github-metrics.svg" width="45%" alt="GitHub Metrics" />
   <img src="./graphs/gitlab-metrics.svg" width="45%" alt="GitLab Metrics" />
 </p>
@@ -183,7 +183,7 @@
 <p align="center">
     <a href="https://github.com/Aayusha-Regmi/Aayusha-Regmi">
         <img src="https://github-profile-trophy.vercel.app/?username=Aayusha-Regmi&column=-1&theme=dracula&layout=compact"width="95%"/> 
-</p>
+</p> -->
 
 
 <div align="center">
